@@ -76,6 +76,7 @@ public class Board {
 
     }
 
+
     public int getNumberOfSurroundingMines(int positionI, int positionJ) {
 
         int sum = 0;

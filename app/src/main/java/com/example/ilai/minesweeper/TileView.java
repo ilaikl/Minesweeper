@@ -20,7 +20,6 @@ public class TileView extends LinearLayout {
         super(context);
 
         this.setOrientation(VERTICAL);
-
         text = new TextView(context);
 
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
@@ -28,10 +27,8 @@ public class TileView extends LinearLayout {
 
         text.setTextAlignment(TEXT_ALIGNMENT_CENTER);
         text.setGravity(Gravity.CENTER_VERTICAL);
-        text.setTextSize(50);
+        text.setTextSize(21);
         text.setTextColor(Color.BLACK);
-
-        setBackgroundColor(Color.CYAN);
 
 
         this.addView(text);

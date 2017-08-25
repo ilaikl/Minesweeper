@@ -34,44 +34,35 @@ public class TileAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-
         TileView tileView;
         tileView = (TileView)convertView;
         if(tileView == null)
             tileView = new TileView(mContext);
 
 
-        //tileView.text.setText(getItem(position).);
-       // tileView.setBackgroundResource(R.drawable.filename);
-
-
-        //Resetting the tile's look:
-        tileView.setBackgroundColor(Color.GRAY);
+        tileView.setBackgroundResource(R.drawable.tilebackground);
         tileView.text.setText("");
 
-        //If not revealed:
         if(!getItem(position).ismIsSelected()){
 
-            //if this tile isn't revealed, all we have to do is check if its flagged:
             if(getItem(position).ismIsFlaged()){
                 tileView.setBackgroundResource(R.drawable.flag32);
             }
 
         }
-        else { //The tile is revealed:
+        else {
 
-            tileView.setBackgroundColor(Color.WHITE);
+            tileView.setBackgroundResource(R.drawable.tilebackgroundselected);
 
-            //checking if there's an "unjustified" flag:
             if(!getItem(position).ismIsFlaged()){
 
                 if(getItem(position).ismIsMined()){
-                    tileView.setBackgroundResource(R.drawable.mine32); // revealed and mined.
+                    tileView.setBackgroundResource(R.drawable.mine32);
                 }
-                else{ //Revealed, but not mined and not flagged:
+                else{
                     int surroundingMines = mBoard.getNumberOfSurroundingMines(position/mBoard.getDimension(),
                             position%mBoard.getDimension());
-                    if(surroundingMines > 0) { //The tile should show the number of surrounding mines if there are any.
+                    if(surroundingMines > 0) {
                         tileView.text.setText("" + surroundingMines);
                     }
                 }

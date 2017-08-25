@@ -8,24 +8,34 @@ public class Game {
     private Board mBoard;
     private Level level;
     private GameStatus mGameStatus;
+    private int minesLeft;
 
     public Game(Level level){
         mGameStatus=GameStatus.NOT_YET_STARTED;
         this.level=level;
         if(level==Level.EASY)
-            mBoard=new Board(10,5);
+            {mBoard=new Board(10,5);minesLeft=5;}
         if(level==Level.MEDIUM)
-            mBoard=new Board(10,10);
+            {mBoard=new Board(10,10);minesLeft=10;}
         if(level==Level.HARD)
-            mBoard=new Board(5,10);
+            {mBoard=new Board(5,10);minesLeft=10;}
     }
 
     public void flagUnflagTile(int i,int j){
         if(!mBoard.getTile(i,j).ismIsSelected())
             mBoard.getTile(i,j).setmIsFlaged(!mBoard.getTile(i,j).ismIsFlaged());
+        if(mBoard.getTile(i,j).ismIsFlaged())
+            minesLeft--;
+        if(!mBoard.getTile(i,j).ismIsFlaged())
+            minesLeft++;
+
     }
 
-    public void selectTile(int i,int j){
+    public int getMinesLeft() {
+        return minesLeft;
+    }
+
+    public void selectTile(int i, int j){
         if (mGameStatus==GameStatus.NOT_YET_STARTED)
             mGameStatus=GameStatus.STARTED;
         if(!mBoard.getTile(i,j).ismIsSelected() && !mBoard.getTile(i,j).ismIsFlaged())

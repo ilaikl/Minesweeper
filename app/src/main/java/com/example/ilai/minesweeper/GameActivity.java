@@ -14,6 +14,8 @@ import com.example.ilai.minesweeper.Logic.Game;
 import com.example.ilai.minesweeper.Logic.GameStatus;
 import com.example.ilai.minesweeper.Logic.Level;
 
+import org.w3c.dom.Text;
+
 public class GameActivity extends AppCompatActivity {
     private Level level;
     private TextView mGameTextView;
@@ -22,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
     private TextView mTimeText;
     private Thread timeThread;
     private int time=0;
+    private TextView mMinesRemainsText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +39,25 @@ public class GameActivity extends AppCompatActivity {
 
         mGrid.setNumColumns(mGame.getmBoard().getDimension());
 
+        mMinesRemainsText = (TextView) findViewById(R.id.mines_remained_text);
+        mMinesRemainsText.setText("remaining mines: "+mGame.getMinesLeft());
+
+
         mGrid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 mGame.flagUnflagTile(position / mGame.getmBoard().getDimension(),
                         position % mGame.getmBoard().getDimension());
+
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mMinesRemainsText.setText("remaining mines: "+mGame.getMinesLeft());
+                    }
+                });
+
+
 
                 ((TileAdapter) mGrid.getAdapter()).notifyDataSetChanged();
                 return true;
@@ -64,6 +81,7 @@ public class GameActivity extends AppCompatActivity {
                     b.putInt("timekey", time);
                     i.putExtra("m_bundle2",b);
                     startActivity(i);
+                    finish();
                 }
             }
 
@@ -74,7 +92,7 @@ public class GameActivity extends AppCompatActivity {
         timeThread=new Thread(new Runnable() {
             @Override
             public void run() {
-                    while ((mGame.getmGameStatus() == GameStatus.STARTED) || (mGame.getmGameStatus() == GameStatus.NOT_YET_STARTED)) {
+                    while ((mGame.getmGameStatus() != GameStatus.WON) && (mGame.getmGameStatus() != GameStatus.LOST)) {
                         if (mGame.getmGameStatus() == GameStatus.STARTED) {
                             try {
                                 Thread.sleep(1000);
@@ -98,4 +116,5 @@ public class GameActivity extends AppCompatActivity {
         timeThread.start();
 
     }
+
 }
