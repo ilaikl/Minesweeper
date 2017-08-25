@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/backgroundp270"
+    >
+
+    <TextView
+        android:id="@+id/textViewMain"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="MINESWEEPER"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textColor="#d62f6e"
+        />
+    <TextView
+        android:id="@+id/textViewMain"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Choose your level:"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="#d62f6e"
+        />
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/MyRadioGroup"
+        android:layout_marginLeft="20dp">
+
+    <RadioButton
+        android:id="@+id/radioButtonEasy"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="easy"
+        android:layout_marginLeft="150dp"
+        android:textColor="#d62f6e"
+     />
+
+    <RadioButton
+        android:id="@+id/radioButtonMedium"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="medium"
+        android:textColor="#d62f6e"
+        android:layout_marginLeft="150dp"/>
+
+    <RadioButton
+        android:id="@+id/radioButtonHard"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="150dp"
+        android:text="hard"
+        android:textColor="#d62f6e" />
+    </RadioGroup>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="START"
+        android:background="#d62f6e"
+        android:textColor="#ffffff"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"/>
+
+
+</LinearLayout>
