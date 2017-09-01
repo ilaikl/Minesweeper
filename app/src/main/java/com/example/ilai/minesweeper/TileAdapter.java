@@ -40,7 +40,7 @@ public class TileAdapter extends BaseAdapter {
             tileView = new TileView(mContext);
 
 
-        tileView.setBackgroundResource(R.drawable.tilebackground);
+        tileView.setBackgroundResource(R.drawable.unexposed_tile);
         tileView.text.setText("");
 
         if(!getItem(position).ismIsSelected()){
@@ -52,12 +52,12 @@ public class TileAdapter extends BaseAdapter {
         }
         else {
 
-            tileView.setBackgroundResource(R.drawable.tilebackgroundselected);
+            tileView.setBackgroundColor(Color.TRANSPARENT);
 
             if(!getItem(position).ismIsFlaged()){
 
                 if(getItem(position).ismIsMined()){
-                    tileView.setBackgroundResource(R.drawable.mine32);
+                    tileView.setBackgroundResource(R.drawable.mine);
                 }
                 else{
                     int surroundingMines = mBoard.getNumberOfSurroundingMines(position/mBoard.getDimension(),
