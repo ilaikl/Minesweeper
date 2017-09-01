@@ -35,7 +35,7 @@ public class GameActivity extends AppCompatActivity {
         mGame=new Game(level);
         mGrid = (GridView) findViewById(R.id.GridLayout1);
 
-        mGrid.setAdapter(new TileAdapter(getApplicationContext(),mGame.getmBoard()));
+        mGrid.setAdapter(new TileAdapter(mGame.getmBoard()));
 
         mGrid.setNumColumns(mGame.getmBoard().getDimension());
 
