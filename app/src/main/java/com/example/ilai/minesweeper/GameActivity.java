@@ -1,20 +1,17 @@
 package com.example.ilai.minesweeper;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.example.ilai.minesweeper.Logic.Board;
 import com.example.ilai.minesweeper.Logic.Game;
 import com.example.ilai.minesweeper.Logic.GameStatus;
 import com.example.ilai.minesweeper.Logic.Level;
-
-import org.w3c.dom.Text;
 
 public class GameActivity extends AppCompatActivity {
     private Level level;
@@ -30,6 +27,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         level =(Level) getIntent().getBundleExtra("m_bundle").getSerializable("string_level");
         mGame=new Game(level);
@@ -114,7 +112,12 @@ public class GameActivity extends AppCompatActivity {
         });
 
         timeThread.start();
-
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        mGame.exit();
+    }
 }
