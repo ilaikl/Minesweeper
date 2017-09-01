@@ -33,11 +33,9 @@ public class TileAdapter extends BaseAdapter {
         TileView tileView;
         tileView = (TileView)convertView;
         if(tileView == null) {
-            tileView = new TileView(convertView.getContext());
+            tileView = new TileView(parent.getContext());
         }
 
-
-        tileView.setBackgroundResource(R.drawable.unexposed_tile);
         tileView.text.setText("");
 
         if(!getItem(position).ismIsSelected()){
@@ -67,9 +65,6 @@ public class TileAdapter extends BaseAdapter {
             }
 
         }
-
-
-
 
         return tileView;
     }
