@@ -52,6 +52,10 @@ public class Game {
 
     }
 
+    public void exit() {
+        mGameStatus = GameStatus.LOST;
+    }
+
     public GameStatus getmGameStatus() {
         return mGameStatus;
     }
