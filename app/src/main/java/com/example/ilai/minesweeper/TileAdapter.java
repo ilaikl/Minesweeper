@@ -17,13 +17,9 @@ import com.example.ilai.minesweeper.Logic.Tile;
 public class TileAdapter extends BaseAdapter {
 
     private Board mBoard;
-    private Context mContext;
 
-    public TileAdapter(Context context, Board board) {
-
+    public TileAdapter(Board board) {
         mBoard = board;
-        mContext = context;
-
     }
 
     @Override
@@ -36,14 +32,15 @@ public class TileAdapter extends BaseAdapter {
 
         TileView tileView;
         tileView = (TileView)convertView;
-        if(tileView == null)
-            tileView = new TileView(mContext);
+        if(tileView == null) {
+            tileView = new TileView(parent.getContext());
+        }
 
-
-        tileView.setBackgroundResource(R.drawable.tilebackground);
         tileView.text.setText("");
 
         if(!getItem(position).ismIsSelected()){
+
+            tileView.setBackgroundResource(R.drawable.tilebackground);
 
             if(getItem(position).ismIsFlaged()){
                 tileView.setBackgroundResource(R.drawable.flag32);
@@ -63,16 +60,13 @@ public class TileAdapter extends BaseAdapter {
                     int surroundingMines = mBoard.getNumberOfSurroundingMines(position/mBoard.getDimension(),
                             position%mBoard.getDimension());
                     if(surroundingMines > 0) {
-                        tileView.text.setText("" + surroundingMines);
+                        tileView.text.setText(String.valueOf(surroundingMines));
                     }
                 }
 
             }
 
         }
-
-
-
 
         return tileView;
     }

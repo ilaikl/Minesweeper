@@ -7,7 +7,6 @@
     >
 
     <TextView
-        android:id="@+id/textViewMain"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="MINESWEEPER"
@@ -16,6 +15,8 @@
         android:layout_marginTop="20dp"
         android:textColor="#d62f6e"
         />
+
+
     <TextView
         android:id="@+id/textViewMain"
         android:layout_width="match_parent"
@@ -25,6 +26,8 @@
         android:layout_marginTop="10dp"
         android:textColor="#d62f6e"
         />
+
+
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
@@ -58,6 +61,9 @@
         android:text="hard"
         android:textColor="#d62f6e" />
     </RadioGroup>
+
+
+
     <Button
         android:id="@+id/button"
         android:layout_width="100dp"
@@ -68,5 +74,16 @@
         android:layout_marginTop="20dp"
         android:layout_gravity="center"/>
 
+
+    <Button
+        android:id="@+id/scores_button"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:text="High Scores"
+        android:textSize="10dp"
+        android:background="#d62f6e"
+        android:textColor="#ffffff"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

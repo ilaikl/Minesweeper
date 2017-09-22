@@ -77,6 +77,43 @@ public class Board {
     }
 
 
+    public boolean addMine(){
+        if(getPlayableTilesLeft() == 0 || mines == dimension*dimension) {
+            return false;
+        }
+
+        boolean mineAdded = false;
+        Random rnd = new Random();
+
+        while(!mineAdded) {
+
+            int randomRow = rnd.nextInt(dimension);
+            int randomCol = rnd.nextInt(dimension);
+
+            if(!tilesArr[randomRow][randomCol].ismIsMined() &&
+                    !tilesArr[randomRow][randomCol].ismIsSelected()){
+                tilesArr[randomRow][randomCol].setmIsMined(true);
+                playableTilesLeft--;
+                mines++;
+                mineAdded = true;
+                for(int i = randomRow-1; i <= randomRow+1; i++){
+                    for(int j = randomCol-1; j <= randomCol+1; j++){
+
+                        if(i>=0 && i< dimension && j>=0 && j< dimension){
+                            if(i!=randomRow || j!=randomCol){
+                                if(tilesArr[i][j].ismIsSelected()) {
+                                    tilesArr[i][j].setmIsSelected(false);
+                                    playableTilesLeft++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     public int getNumberOfSurroundingMines(int positionI, int positionJ) {
 
         int sum = 0;
@@ -98,6 +135,12 @@ public class Board {
         return sum;
     }
 
+    public int getMines(){
+        return mines;
+    }
+    public void setMines(int mines){
+        this.mines = mines;
+    }
     public int getDimension() {
         return dimension;
     }

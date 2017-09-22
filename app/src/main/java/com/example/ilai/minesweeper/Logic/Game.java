@@ -14,11 +14,11 @@ public class Game {
         mGameStatus=GameStatus.NOT_YET_STARTED;
         this.level=level;
         if(level==Level.EASY)
-            {mBoard=new Board(10,5);minesLeft=5;}
+        {mBoard=new Board(10,5);minesLeft=5;}
         if(level==Level.MEDIUM)
-            {mBoard=new Board(10,10);minesLeft=10;}
+        {mBoard=new Board(10,10);minesLeft=10;}
         if(level==Level.HARD)
-            {mBoard=new Board(5,10);minesLeft=10;}
+        {mBoard=new Board(5,10);minesLeft=10;}
     }
 
     public void flagUnflagTile(int i,int j){
@@ -50,6 +50,23 @@ public class Game {
 
         }
 
+    }
+
+    public void punishPlayer() {
+        if(mGameStatus == GameStatus.NOT_YET_STARTED || mGameStatus == GameStatus.STARTED) {
+            if(mBoard.addMine()) {
+                minesLeft++;
+                if(mBoard.getPlayableTilesLeft() == 0 ||
+                        mBoard.getMines() == mBoard.getDimension()*mBoard.getDimension()) {
+                    mGameStatus = GameStatus.LOST;
+                }
+            }
+        }
+
+    }
+
+    public void exit() {
+        mGameStatus = GameStatus.LOST;
     }
 
     public GameStatus getmGameStatus() {

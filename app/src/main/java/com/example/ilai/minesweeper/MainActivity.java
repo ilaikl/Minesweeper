@@ -1,8 +1,13 @@
 package com.example.ilai.minesweeper;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -11,18 +16,18 @@ import android.view.View;
 
 import com.example.ilai.minesweeper.Logic.Level;
 
-import java.io.FileOutputStream;
-
 public class MainActivity extends AppCompatActivity {
 
     public static final String DEFAULT = "N/A";
     private Level level=null;
     private RadioButton mRadioButtonEasy,mRadioButtonMedium,mRadioButtonHard;
     private Button mButton;
+    private Button mScoresButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         mRadioButtonEasy = (RadioButton) findViewById(R.id.radioButtonEasy);
         mRadioButtonMedium = (RadioButton) findViewById(R.id.radioButtonMedium);
@@ -53,7 +58,16 @@ public class MainActivity extends AppCompatActivity {
         mButton = (Button) findViewById(R.id.button);
 
 
+        mScoresButton = (Button) findViewById(R.id.scores_button);
 
+
+        mScoresButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, LeaderboardActivity.class);
+                startActivity(i);
+            }
+        });
 
             mButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,10 +91,53 @@ public class MainActivity extends AppCompatActivity {
                             b.putSerializable("string_level", level);
                             i.putExtra("m_bundle",b);
                             startActivity(i);
-                            finish();
                         }
                 }
             });
+        checkForPermissions();
     }
 
+    private void checkForPermissions() {
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    Constants.MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case Constants.MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                }
+                else {
+                    createVerificationDialog();
+                }
+                return;
+            }
+        }
+    }
+
+    private void createVerificationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("this app needs your permission...")
+                .setNegativeButton("Go Back", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                        ActivityCompat.requestPermissions(MainActivity.this,
+                                new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                                Constants.MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                    }
+                }).setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                finish();
+            }
+        }).setCancelable(false)
+                .create()
+                .show();
+    }
 }

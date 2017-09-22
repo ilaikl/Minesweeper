@@ -13,9 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/won_lost_text"
-        android:textSize="24dp"
+        android:textSize="14dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="90dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="20dp"
@@ -23,23 +23,32 @@
         />
 
     <Button
-        android:text="Start Over"
+        android:text="Go Back To Menu"
+        android:height="18dp"
+        android:width="76dp"
         android:textAllCaps="false"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/back_button"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="120dp"
-        android:textSize="30dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:layout_below="@+id/conclusion_text"
+        android:textSize="14dp"
         android:background="#d62f6e"
         android:textColor="#ffffff"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="250dp"
+        android:textColor="#d62f6e"
+        android:gravity="center"
+        android:hint="Enter Your Name"
+        android:id="@+id/edit_text_name"
+        android:visibility="visible"
+        />
+
 
 </RelativeLayout>
